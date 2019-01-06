@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: server-sleuth-zipkin
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: server-config
+      profile: pro
+

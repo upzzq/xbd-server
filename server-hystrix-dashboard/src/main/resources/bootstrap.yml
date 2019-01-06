@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: server-hystrix-dashboard
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: server-config
+      profile: pro
+turbine:
+  #配置Eureka中的serviceId列表，表明监控哪些服务
+  appConfig: service-pro-bbd,service-user
+  #指定聚合哪些集群，多个使用”,”分割，默认为default。可使用http://.../turbine.stream?cluster={clusterConfig之一}访问
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")

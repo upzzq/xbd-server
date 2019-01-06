@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: server-router-zuul
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: server-config
+      profile: dev

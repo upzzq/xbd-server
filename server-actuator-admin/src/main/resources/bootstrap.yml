@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: server-actuator-admin
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: server-config
+      profile: pro
