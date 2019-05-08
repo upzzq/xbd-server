@@ -1,21 +1,12 @@
 server:
-  port: 8888
+  port: 9888
 spring:
   application:
     name: server-config
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/upzzq/xbd-config
-          basedir: d:/svc/basedir/config
 #      discovery:
 #        enabled: true
 #        service-id: server-config
 #      profile: pro
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+
 

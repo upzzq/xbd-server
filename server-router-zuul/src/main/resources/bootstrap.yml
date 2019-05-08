@@ -1,9 +1,15 @@
+
 spring:
-  application:
-    name: server-router-zuul
   cloud:
     config:
       discovery:
         enabled: true
         service-id: server-config
-      profile: dev
+      profile: pro
+eureka:
+  client:
+    service-url:
+      defaultZone: http://101.132.151.69:8761/eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
