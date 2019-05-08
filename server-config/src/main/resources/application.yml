@@ -1,12 +1,24 @@
 server:
-  port: 9888
+  port: 8888
 spring:
   application:
     name: server-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/upzzq/xbd-config
+          basedir: d:/svc/basedir/config
 #      discovery:
 #        enabled: true
 #        service-id: server-config
 #      profile: pro
 
-
+eureka:
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
