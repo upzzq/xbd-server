@@ -1,11 +1,13 @@
-
 spring:
+  application:
+    name: server-router-zuul
   cloud:
     config:
       discovery:
         enabled: true
-        service-id: server-config
-      profile: pro
+        service-id: server-config2
+      profile: dev
+
 eureka:
   client:
     service-url:

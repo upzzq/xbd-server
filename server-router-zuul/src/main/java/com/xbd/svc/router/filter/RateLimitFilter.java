@@ -1,15 +1,16 @@
-package com.xbd.svc.server.router.filter;
+package com.xbd.svc.router.filter;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.exception.ZuulException;
-import com.xbd.svc.server.router.exception.RateLimiterException;
+import com.xbd.svc.router.exception.RateLimiterException;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
 /**
  * 限流拦截器
  * 使用令牌桶算法
  */
+
 public class RateLimitFilter extends ZuulFilter {
 
     //使用google guava包中的令牌桶算法,初始化时设置每秒向桶内放入多少个令牌

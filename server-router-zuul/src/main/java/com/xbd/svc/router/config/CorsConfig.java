@@ -1,4 +1,4 @@
-package com.xbd.svc.server.router.config;
+package com.xbd.svc.router.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import java.util.Arrays;
  * zuul 跨域配置
  * 统一跨域处理也可以在Nginx上解决
  */
-@Configuration
+//@Configuration
 public class CorsConfig {
 
     @Bean

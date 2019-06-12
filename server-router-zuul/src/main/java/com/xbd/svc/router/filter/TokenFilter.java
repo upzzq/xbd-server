@@ -1,4 +1,4 @@
-package com.xbd.svc.server.router.filter;
+package com.xbd.svc.router.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 校验请求参数中是否有token，用于校验身份
  */
-@Component
+//@Component
 public class TokenFilter extends ZuulFilter {
 
     /**

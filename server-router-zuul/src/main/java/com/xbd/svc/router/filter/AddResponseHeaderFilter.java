@@ -1,4 +1,4 @@
-package com.xbd.svc.server.router.filter;
+package com.xbd.svc.router.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 测试后置拦截器,随意在返回结果的头部中增加一个header
  */
-@Component
+//@Component
 public class AddResponseHeaderFilter extends ZuulFilter {
 
 

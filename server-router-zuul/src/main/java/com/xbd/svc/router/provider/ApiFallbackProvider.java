@@ -1,6 +1,7 @@
-package com.xbd.svc.server.router.provider;
+package com.xbd.svc.router.provider;
 
-import com.netflix.hystrix.exception.HystrixTimeoutException;
+import com.alibaba.fastjson.JSONObject;
+import com.xbd.svc.router.enums.ZuulServiceExceptionEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.http.HttpHeaders;
@@ -17,11 +18,16 @@ import java.io.InputStream;
 @Component
 public class ApiFallbackProvider implements FallbackProvider {
 
+    public ApiFallbackProvider() {
+        System.out.println("6666666");
+    }
+
     @Override
     public String getRoute() {
         return "*";
     }
 
+    @Override
     public ClientHttpResponse fallbackResponse() {
         return new ClientHttpResponse() {
             @Override
@@ -46,7 +52,13 @@ public class ApiFallbackProvider implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("The service is unavailable.".getBytes());
+
+                ZuulServiceExceptionEnum routerErrorEnum = ZuulServiceExceptionEnum.ROUTER_ERROR;
+                JSONObject routerErrorMsg = new JSONObject();
+                routerErrorMsg.put("code", routerErrorEnum.getCode());
+                routerErrorMsg.put("message", routerErrorEnum.getMessage());
+                //返回前端的内容
+                return new ByteArrayInputStream(routerErrorMsg.toJSONString().getBytes("UTF-8"));
             }
 
             @Override
@@ -62,11 +74,10 @@ public class ApiFallbackProvider implements FallbackProvider {
     public ClientHttpResponse fallbackResponse(Throwable cause) {
         if (cause != null && cause.getCause() != null) {
             String reason = cause.getCause().getMessage();
-            log.info("Excption {}",reason);
+            log.info("Excption {}", reason);
         }
         return fallbackResponse();
     }
-
 
 
 }
