@@ -7,11 +7,27 @@ spring:
         enabled: true
         service-id: server-config2
       profile: dev
+      fail-fast: true
+
 
 eureka:
   client:
     service-url:
-      defaultZone: http://101.132.151.69:8761/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/
+    # 拉取服务列表的时间(秒),网关需要快速获取服务信息 5秒即可
+    registry-fetch-interval-seconds: 5
   instance:
     preferIpAddress: true
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+zuul:
+  # 转发时携带域名(需要配合nginx server{ proxy_set_header Host ${host} } 设置)
+  # https://www.jianshu.com/p/35ede833fa7d
+  add-host-header: true
+  #覆盖默认敏感头信息(默认忽略的敏感头会让服务无法写入cookie)
+  sensitive-headers:
+  routes:
+    service-auth: auth/**
+    service-item: item/**
+    service-cart: cart/**
+    service-user: user/**
+    service-search: search/**

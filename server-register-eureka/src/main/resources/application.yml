@@ -4,11 +4,15 @@ spring:
   application:
     name: server-register-eureka
 eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
   instance:
     preferIpAddress: true
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    # 自己不注册到自己的服务商
+    register-with-eureka: false
+    # 不拉取服务列表信息
+    fetch-registry: false
   server:
+    # 关闭自我保护模式
     enable-self-preservation: false
+    # 定期清理无效连接
+    eviction-interval-timer-in-ms: 10000

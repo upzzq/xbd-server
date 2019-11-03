@@ -28,7 +28,15 @@ public class ApiFallbackProvider implements FallbackProvider {
     }
 
     @Override
-    public ClientHttpResponse fallbackResponse() {
+    public ClientHttpResponse fallbackResponse(String router, Throwable cause) {
+        if (cause != null && cause.getCause() != null) {
+            String reason = cause.getCause().getMessage();
+            log.info("router err, router: {}, Excption {}", router, reason);
+        }
+        return response();
+    }
+
+    public ClientHttpResponse response() {
         return new ClientHttpResponse() {
             @Override
             public HttpStatus getStatusCode() throws IOException {
@@ -70,14 +78,7 @@ public class ApiFallbackProvider implements FallbackProvider {
         };
     }
 
-    @Override
-    public ClientHttpResponse fallbackResponse(Throwable cause) {
-        if (cause != null && cause.getCause() != null) {
-            String reason = cause.getCause().getMessage();
-            log.info("Excption {}", reason);
-        }
-        return fallbackResponse();
-    }
+
 
 
 }

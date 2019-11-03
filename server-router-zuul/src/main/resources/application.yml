@@ -1,1 +1,24 @@
 
+
+# 上传大文件得将超时时间设置长一些，否则会报超时异常
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+spring:
+  http:
+    multipart:
+      file-size-threshold: 10Mb
+
+xbd:
+  #只关心能不能解析JWT,所以只要公钥信息
+  jwt:
+    pubKeyPath: C:\\tmp\\rsa\\rsa.pub
+    cookieName: xbd_token
+  filter:
+    # 登录白名单
+    allowPaths:
+      - /service-auth
+    allowedOrigins:
+      - http://wechat.xbd.com
+      - http://manage.xbd.com
